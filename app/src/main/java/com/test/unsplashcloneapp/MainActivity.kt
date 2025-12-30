@@ -3,45 +3,57 @@ package com.test.unsplashcloneapp
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.test.unsplashcloneapp.presentation.ui.BookmarkScreen
+import com.test.unsplashcloneapp.presentation.ui.DetailScreen
+import com.test.unsplashcloneapp.presentation.ui.SearchScreen
 import com.test.unsplashcloneapp.ui.theme.UnsplashCloneAppTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint // <--- 이 어노테이션이 없으면 에러가 발생합니다!
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContent {
             UnsplashCloneAppTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                val navController = rememberNavController()
+
+                NavHost(navController = navController, startDestination = "search") {
+
+                    // 검색 화면
+                    composable("search") {
+                        SearchScreen(
+                            onImageClick = { photoId ->
+                                navController.navigate("detail/$photoId")
+                            },
+                            onBookmarkClick = {
+                                navController.navigate("bookmark")
+                            }
+                        )
+                    }
+
+                    // 상세 화면
+                    composable("detail/{photoId}") { backStackEntry ->
+                        val photoId = backStackEntry.arguments?.getString("photoId")
+                        DetailScreen(
+                            photoId = photoId,
+                            onBackClick = { navController.popBackStack() }
+                        )
+                    }
+
+                    // 북마크 화면
+                    composable("bookmark") {
+                        BookmarkScreen(
+                            onBackClick = { navController.popBackStack() },
+                            onImageClick = { photoId ->
+                                navController.navigate("detail/$photoId")
+                            }
+                        )
+                    }
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    UnsplashCloneAppTheme {
-        Greeting("Android")
     }
 }

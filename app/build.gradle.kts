@@ -1,12 +1,14 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
+//    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.hilt)
 }
 
 android {
     namespace = "com.test.unsplashcloneapp"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.test.unsplashcloneapp"
@@ -17,7 +19,11 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
-
+    packaging {
+        resources {
+            pickFirst("META-INF/gradle/incremental.annotation.processors")
+        }
+    }
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -28,8 +34,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
         jvmTarget = "17"
@@ -37,41 +43,34 @@ android {
     buildFeatures {
         compose = true
     }
-}
 
+    composeOptions {
+        // Kotlin 1.9.24에 맞는 컴파일러 버전
+        kotlinCompilerExtensionVersion = "1.5.14"
+    }
+}
+configurations.all {
+    exclude(group = "com.intellij", module = "annotations")
+}
 dependencies {
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.material3)
-    // Navigation
-    implementation(libs.navigation.compose)
-
-    // Paging
+    implementation(libs.androidx.material.icons.extended)
+    implementation(libs.androidx.navigation.compose)
     implementation(libs.bundles.paging)
-
-    // Hilt
+    implementation(libs.bundles.compose)
+    implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.hilt.android)
-    implementation(libs.hilt.navigation.compose)
-
-    // Retrofit
+    implementation(libs.hilt.compiler)
     implementation(libs.retrofit.core)
     implementation(libs.retrofit.gson)
     implementation(libs.okhttp.logging)
-
-    // Coil
     implementation(libs.coil.compose)
-
-    // Room
     implementation(libs.bundles.room)
-
-    // Coroutines
-    implementation(libs.coroutines.android)
+    implementation(libs.kotlinx.coroutines.android)
     testImplementation(libs.junit)
 
     androidTestImplementation(libs.androidx.junit)
@@ -80,4 +79,7 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+}
+kapt {
+    correctErrorTypes = true
 }
