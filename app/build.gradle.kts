@@ -30,8 +30,6 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
-        kotlinCompilerExtensionVersion =
-            libs.versions.composeCompiler.get()
     }
     kotlinOptions {
         jvmTarget = "17"
@@ -51,7 +49,6 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-    implementation(libs.bundles.compose)
     // Navigation
     implementation(libs.navigation.compose)
 
@@ -60,7 +57,6 @@ dependencies {
 
     // Hilt
     implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
     implementation(libs.hilt.navigation.compose)
 
     // Retrofit
@@ -73,7 +69,6 @@ dependencies {
 
     // Room
     implementation(libs.bundles.room)
-    kapt(libs.room.compiler)
 
     // Coroutines
     implementation(libs.coroutines.android)

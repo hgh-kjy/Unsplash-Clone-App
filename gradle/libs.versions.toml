@@ -73,11 +73,6 @@ coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coi
 coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
 
 [bundles]
-compose = [
-    "compose-ui",
-    "compose-material3",
-    "compose-preview"
-]
 paging = [
     "paging-runtime",
     "paging-compose"
