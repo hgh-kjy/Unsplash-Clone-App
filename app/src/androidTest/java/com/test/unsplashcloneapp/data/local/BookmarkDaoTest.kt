@@ -22,7 +22,6 @@ class BookmarkDaoTest {
     @Before
     fun createDb() {
         val context = ApplicationProvider.getApplicationContext<Context>()
-        // 테스트용으로는 메모리 DB를 사용하여 종료 시 데이터가 휘발되도록 함
         db = Room.inMemoryDatabaseBuilder(context, AppDatabase::class.java)
             .build()
         dao = db.bookmarkDao()
@@ -35,7 +34,6 @@ class BookmarkDaoTest {
 
     @Test
     fun insert_and_read_bookmark() = runTest {
-        // Given
         val bookmark = BookmarkEntity(
             id = "photo1",
             imageUrl = "url",
@@ -45,26 +43,38 @@ class BookmarkDaoTest {
             createdAt = "2024-01-01"
         )
 
-        // When
         dao.insertBookmark(bookmark)
-        val list = dao.getAllBookmarks().first() // Flow의 첫 번째 값을 가져옴
+        val list = dao.getAllBookmarks().first()
 
-        // Then
         assertEquals(1, list.size)
         assertEquals(bookmark.id, list[0].id)
     }
 
     @Test
     fun delete_bookmark() = runTest {
-        // Given
         val bookmark = BookmarkEntity("photo1", "url", "author", 100, 100, "date")
         dao.insertBookmark(bookmark)
 
-        // When
         dao.deleteBookmark("photo1")
         val list = dao.getAllBookmarks().first()
 
-        // Then
         assertTrue(list.isEmpty())
+    }
+
+    @Test
+    fun insert_and_delete_multiple_bookmarks() = runTest {
+        val list = listOf(
+            BookmarkEntity("1", "url1", "a", 100, 100, "d1"),
+            BookmarkEntity("2", "url2", "b", 100, 100, "d2"),
+            BookmarkEntity("3", "url3", "c", 100, 100, "d3")
+        )
+        dao.insertBookmarks(list)
+
+        val idsToDelete = listOf("1", "3")
+        dao.deleteBookmarks(idsToDelete)
+
+        val stored = dao.getAllBookmarks().first()
+        assertEquals(1, stored.size)
+        assertEquals("2", stored[0].id)
     }
 }

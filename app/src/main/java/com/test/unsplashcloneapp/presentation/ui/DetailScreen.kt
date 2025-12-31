@@ -82,7 +82,6 @@ fun DetailScreen(
                     .padding(padding)
                     .verticalScroll(rememberScrollState())
             ) {
-                // 상단 이미지
                 AsyncImage(
                     model = item.urls.regular,
                     contentDescription = item.description,

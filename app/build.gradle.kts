@@ -16,8 +16,8 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-//        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         testInstrumentationRunner = "com.test.unsplashcloneapp.CustomTestRunner"
+        buildConfigField("String", "UNSPLASH_ACCESS_KEY", "\"EG5T4YGdmvax-jmGL84bc00xvEWhxNo-7MWTm6Td7I4\"")
     }
     packaging {
         resources {
@@ -47,6 +47,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 
     composeOptions {

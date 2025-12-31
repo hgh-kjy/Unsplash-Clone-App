@@ -106,7 +106,7 @@ fun BookmarkScreen(
                     ) {
                         AsyncImage(
                             model = item.imageUrl,
-                            contentDescription = null,
+                            contentDescription = stringResource(R.string.desc_photo),
                             modifier = Modifier.fillMaxSize().alpha(if (isSelected) 0.5f else 1f),
                             contentScale = ContentScale.Crop
                         )

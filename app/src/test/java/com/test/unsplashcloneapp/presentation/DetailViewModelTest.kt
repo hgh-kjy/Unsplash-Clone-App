@@ -31,7 +31,6 @@ class DetailViewModelTest {
 
     @Test
     fun loadPhotoDetail_fetches_data_successfully_from_api() = runTest {
-        // Given
         val fakePhoto = UnsplashPhoto(
             id = "photo1",
             createdAt = "2024-01-01",
@@ -44,10 +43,8 @@ class DetailViewModelTest {
         )
         coEvery { api.getPhotoDetail("photo1") } returns fakePhoto
 
-        // When
         viewModel.loadPhotoDetail("photo1")
 
-        // Then
         val result = viewModel.photoDetail.value
         assertEquals("photo1", result?.id)
         assertEquals("Test User", result?.user?.name)
@@ -57,7 +54,6 @@ class DetailViewModelTest {
 
     @Test
     fun toggleBookmark_adds_bookmark_when_not_bookmarked() = runTest {
-        // Given
         val photo = UnsplashPhoto(
             id = "photo1",
             createdAt = "2024-01-01",
@@ -68,16 +64,13 @@ class DetailViewModelTest {
             user = User("u1", "user", "name")
         )
 
-        // When
         viewModel.toggleBookmark(photo, isCurrentlyBookmarked = false)
 
-        // Then
         coVerify(exactly = 1) { dao.insertBookmark(any()) }
     }
 
     @Test
     fun toggleBookmark_removes_bookmark_when_already_bookmarked() = runTest {
-        // Given
         val photo = UnsplashPhoto(
             id = "photo1",
             createdAt = "2024-01-01",
@@ -88,10 +81,8 @@ class DetailViewModelTest {
             user = User("u1", "user", "name")
         )
 
-        // When
         viewModel.toggleBookmark(photo, isCurrentlyBookmarked = true)
 
-        // Then
         coVerify(exactly = 1) { dao.deleteBookmark("photo1") }
     }
 }

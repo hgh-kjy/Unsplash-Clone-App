@@ -23,7 +23,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SearchViewModel @Inject constructor(
     private val unsplashService: UnsplashService,
-    private val bookmarkDao: BookmarkDao // [추가] DB 접근 필요
+    private val bookmarkDao: BookmarkDao
 ) : ViewModel() {
 
     companion object {

@@ -7,6 +7,7 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTextInput
 import com.test.unsplashcloneapp.MainActivity
+import com.test.unsplashcloneapp.R
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.Rule
@@ -23,24 +24,27 @@ class SearchScreenTest {
 
     @Test
     fun search_screen_elements_are_displayed_correctly() {
-        // 앱바 타이틀 확인
-        composeRule.onNodeWithText("Unsplash Clone").assertIsDisplayed()
+        val context = composeRule.activity
 
-        // 검색창 플레이스홀더 확인
-        composeRule.onNodeWithText("Search photos...").assertIsDisplayed()
+        val title = context.getString(R.string.search_title)
+        composeRule.onNodeWithText(title).assertIsDisplayed()
 
-        // 북마크 아이콘 확인
-        composeRule.onNodeWithContentDescription("Bookmarks").assertIsDisplayed()
+        val placeholder = context.getString(R.string.search_placeholder)
+        composeRule.onNodeWithText(placeholder).assertIsDisplayed()
+
+        val bookmarkDesc = context.getString(R.string.desc_bookmark)
+        composeRule.onNodeWithContentDescription(bookmarkDesc).assertIsDisplayed()
     }
 
     @Test
     fun can_input_search_query_and_click_search_button() {
-        // 검색창에 "Korea" 입력
-        composeRule.onNodeWithText("Search photos...")
+        val context = composeRule.activity
+        val placeholder = context.getString(R.string.search_placeholder)
+        composeRule.onNodeWithText(placeholder)
             .performTextInput("Korea")
 
-        // 검색 아이콘 클릭
-        composeRule.onNodeWithContentDescription("Search")
+        val bookmarkDesc = context.getString(R.string.desc_bookmark)
+        composeRule.onNodeWithContentDescription(bookmarkDesc)
             .performClick()
     }
 }
