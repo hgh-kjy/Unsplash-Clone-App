@@ -17,7 +17,6 @@ interface BookmarkDao {
     @Query("DELETE FROM bookmarks WHERE id = :id")
     suspend fun deleteBookmark(id: String)
 
-    // 특정 ID가 북마크 되어있는지 확인 (Flow로 실시간 관찰)
     @Query("SELECT EXISTS(SELECT 1 FROM bookmarks WHERE id = :id)")
     fun isBookmarked(id: String): Flow<Boolean>
 }

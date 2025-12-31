@@ -42,7 +42,6 @@ fun SearchScreen(
         }
     ) { padding ->
         Column(modifier = Modifier.padding(padding)) {
-            // 검색바
             OutlinedTextField(
                 value = searchQuery,
                 onValueChange = { searchQuery = it },
@@ -58,7 +57,6 @@ fun SearchScreen(
                 singleLine = true
             )
 
-            // 이미지 그리드 리스트
             LazyVerticalGrid(
                 columns = GridCells.Fixed(2),
                 contentPadding = PaddingValues(8.dp),
@@ -80,7 +78,6 @@ fun SearchScreen(
                     }
                 }
 
-                // 로딩 상태 표시
                 photos.apply {
                     when {
                         loadState.append is LoadState.Loading -> {

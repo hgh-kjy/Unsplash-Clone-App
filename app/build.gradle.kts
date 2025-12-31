@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-//    alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.hilt)
 }
@@ -45,7 +44,6 @@ android {
     }
 
     composeOptions {
-        // Kotlin 1.9.24에 맞는 컴파일러 버전
         kotlinCompilerExtensionVersion = "1.5.14"
     }
 }
@@ -64,15 +62,15 @@ dependencies {
     implementation(libs.bundles.compose)
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.hilt.android)
-    implementation(libs.hilt.compiler)
+    kapt(libs.hilt.compiler)
     implementation(libs.retrofit.core)
     implementation(libs.retrofit.gson)
     implementation(libs.okhttp.logging)
     implementation(libs.coil.compose)
     implementation(libs.bundles.room)
+    kapt(libs.androidx.room.compiler)
     implementation(libs.kotlinx.coroutines.android)
     testImplementation(libs.junit)
-
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))

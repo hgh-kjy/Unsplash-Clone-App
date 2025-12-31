@@ -21,7 +21,7 @@ class SearchViewModel @Inject constructor(
     private val unsplashService: UnsplashService
 ) : ViewModel() {
 
-    private val _query = MutableStateFlow("nature") // 초기 검색어 (빈 값이어도 됨)
+    private val _query = MutableStateFlow("")
 
     @OptIn(ExperimentalCoroutinesApi::class)
     val photos: Flow<PagingData<UnsplashPhoto>> = _query.flatMapLatest { query ->

@@ -25,18 +25,14 @@ class DetailViewModel @Inject constructor(
     fun loadPhotoDetail(id: String) {
         viewModelScope.launch {
             try {
-                // 상세 정보를 API로 다시 불러오거나, 이전 화면에서 전달받은 데이터를 사용해도 됩니다.
-                // 여기서는 API를 호출하여 최신 정보를 가져오는 방식으로 구현합니다.
                 val photo = unsplashService.getPhotoDetail(id)
                 _photoDetail.value = photo
             } catch (e: Exception) {
-                // 에러 처리 (로그 등)
                 e.printStackTrace()
             }
         }
     }
 
-    // 현재 보고 있는 사진이 북마크 되어있는지 확인
     fun isBookmarked(id: String): Flow<Boolean> = bookmarkDao.isBookmarked(id)
 
     fun toggleBookmark(photo: UnsplashPhoto, isCurrentlyBookmarked: Boolean) {
@@ -46,7 +42,7 @@ class DetailViewModel @Inject constructor(
             } else {
                 val entity = BookmarkEntity(
                     id = photo.id,
-                    imageUrl = photo.urls.regular, // 또는 small
+                    imageUrl = photo.urls.regular,
                     author = photo.user.name,
                     width = photo.width,
                     height = photo.height,

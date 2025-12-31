@@ -1,38 +1,19 @@
 [versions]
-# Gradle & Kotlin (API 34 호환)
 agp = "8.3.2"
-kotlin = "1.9.24" # Compose Compiler 1.5.14와 짝꿍
-
-# Core & Lifecycle (최신 안정 버전)
+kotlin = "1.9.24"
 coreKtx = "1.13.1"
 lifecycleRuntimeKtx = "2.8.1"
 activityCompose = "1.9.0"
-composeBom = "2024.06.00" # 최신 Compose BOM
-
-# Navigation & Hilt
+composeBom = "2024.06.00"
 navigation = "2.7.7"
-hiltNavigation = "1.2.0" # API 34에서는 1.2.0 사용 가능
-
-# Paging
+hiltNavigation = "1.2.0"
 paging = "3.3.0"
-
-# DI (Hilt)
 hilt = "2.51.1"
-
-# Network
 retrofit = "2.11.0"
 okhttp = "4.12.0"
-
-# DB
 room = "2.6.1"
-
-# Image
 coil = "2.6.0"
-
-# Coroutines
 coroutines = "1.8.1"
-
-# Test
 junit = "4.13.2"
 junitVersion = "1.1.5"
 espressoCore = "3.5.1"
@@ -49,39 +30,21 @@ androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
-
-# Navigation
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigation" }
-
-# Paging
 androidx-paging-runtime = { group = "androidx.paging", name = "paging-runtime", version.ref = "paging" }
 androidx-paging-compose = { group = "androidx.paging", name = "paging-compose", version.ref = "paging" }
-
-# Hilt
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
 androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltNavigation" }
-
-# Retrofit
 retrofit-core = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 retrofit-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
 okhttp-logging = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
-
-# Room
 androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
-
-# Coil
 coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
-
-# Coroutines
 kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
-
-# Icons
 androidx-material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended" }
-
-# Test
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -99,13 +62,11 @@ paging = [
 ]
 room = [
     "androidx-room-runtime",
-    "androidx-room-ktx",
-    "androidx-room-compiler"
+    "androidx-room-ktx"
 ]
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }

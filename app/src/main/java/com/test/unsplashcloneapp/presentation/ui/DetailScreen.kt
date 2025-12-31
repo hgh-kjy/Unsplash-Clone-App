@@ -69,7 +69,7 @@ fun DetailScreen(
                     contentDescription = item.description,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .wrapContentHeight(), // 원본 비율 유지하거나 aspect ratio 조정
+                        .wrapContentHeight(),
                     contentScale = ContentScale.FillWidth
                 )
 

@@ -14,12 +14,12 @@ interface UnsplashService {
         @Query("query") query: String,
         @Query("page") page: Int,
         @Query("per_page") perPage: Int = 30,
-        @Header("Authorization") clientId: String = "EG5T4YGdmvax-jmGL84bc00xvEWhxNo-7MWTm6Td7I4"
+        @Header("Authorization") clientId: String = "Client-ID EG5T4YGdmvax-jmGL84bc00xvEWhxNo-7MWTm6Td7I4"
     ): SearchResponse
 
     @GET("photos/{id}")
     suspend fun getPhotoDetail(
         @Path("id") id: String,
-        @Header("Authorization") clientId: String = "EG5T4YGdmvax-jmGL84bc00xvEWhxNo-7MWTm6Td7I4"
+        @Header("Authorization") clientId: String = "Client-ID EG5T4YGdmvax-jmGL84bc00xvEWhxNo-7MWTm6Td7I4"
     ): UnsplashPhoto
 }

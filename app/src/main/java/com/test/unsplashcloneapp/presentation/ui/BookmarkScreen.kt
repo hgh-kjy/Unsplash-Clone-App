@@ -41,7 +41,7 @@ fun BookmarkScreen(
     ) { padding ->
         if (bookmarks.isEmpty()) {
             Box(modifier = Modifier.fillMaxSize().padding(padding), contentAlignment = androidx.compose.ui.Alignment.Center) {
-                Text("No bookmarks yet.")
+                Text("Empty.")
             }
         } else {
             LazyVerticalGrid(

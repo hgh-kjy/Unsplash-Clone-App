@@ -21,8 +21,6 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
 
                 NavHost(navController = navController, startDestination = "search") {
-
-                    // 검색 화면
                     composable("search") {
                         SearchScreen(
                             onImageClick = { photoId ->
@@ -34,7 +32,6 @@ class MainActivity : ComponentActivity() {
                         )
                     }
 
-                    // 상세 화면
                     composable("detail/{photoId}") { backStackEntry ->
                         val photoId = backStackEntry.arguments?.getString("photoId")
                         DetailScreen(
@@ -43,7 +40,6 @@ class MainActivity : ComponentActivity() {
                         )
                     }
 
-                    // 북마크 화면
                     composable("bookmark") {
                         BookmarkScreen(
                             onBackClick = { navController.popBackStack() },
