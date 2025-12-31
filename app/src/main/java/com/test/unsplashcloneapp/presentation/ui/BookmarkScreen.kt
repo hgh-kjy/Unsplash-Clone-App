@@ -20,9 +20,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
+import com.test.unsplashcloneapp.R
 import com.test.unsplashcloneapp.presentation.BookmarkViewModel
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
@@ -44,24 +46,24 @@ fun BookmarkScreen(
         topBar = {
             if (isSelectionMode) {
                 TopAppBar(
-                    title = { Text("${selectedIds.size}개 선택됨") },
+                    title = { Text(stringResource(R.string.msg_selected_count, selectedIds.size)) },
                     navigationIcon = {
                         IconButton(onClick = { viewModel.clearSelection() }) {
-                            Icon(Icons.Default.Close, contentDescription = "Close")
+                            Icon(Icons.Default.Close, contentDescription = stringResource(R.string.desc_close))
                         }
                     },
                     actions = {
                         IconButton(onClick = { viewModel.deleteSelectedBookmarks() }) {
-                            Icon(Icons.Default.Delete, contentDescription = "Delete")
+                            Icon(Icons.Default.Delete, contentDescription = stringResource(R.string.desc_delete))
                         }
                     }
                 )
             } else {
                 TopAppBar(
-                    title = { Text("북마크") },
+                    title = { Text(stringResource(R.string.bookmarks_title)) },
                     navigationIcon = {
                         IconButton(onClick = onBackClick) {
-                            Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                            Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.desc_back))
                         }
                     }
                 )
@@ -70,7 +72,7 @@ fun BookmarkScreen(
     ) { padding ->
         if (bookmarks.isEmpty()) {
             Box(modifier = Modifier.fillMaxSize().padding(padding), contentAlignment = Alignment.Center) {
-                Text("북마크가 없습니다.")
+                Text(stringResource(R.string.empty_bookmarks))
             }
         } else {
             LazyVerticalGrid(
@@ -111,7 +113,7 @@ fun BookmarkScreen(
                         if (isSelected) {
                             Icon(
                                 imageVector = Icons.Default.CheckCircle,
-                                contentDescription = null,
+                                contentDescription = stringResource(R.string.desc_selected),
                                 tint = MaterialTheme.colorScheme.primary,
                                 modifier = Modifier.align(Alignment.TopEnd).padding(8.dp)
                             )

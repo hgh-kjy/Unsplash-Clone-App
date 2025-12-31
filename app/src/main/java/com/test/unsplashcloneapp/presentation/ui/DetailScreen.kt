@@ -2,7 +2,6 @@ package com.test.unsplashcloneapp.presentation.ui
 
 import android.widget.Toast
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -20,10 +19,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -67,7 +64,6 @@ fun DetailScreen(
                 onClick = {
                     photo?.let {
                         viewModel.toggleBookmark(it, isBookmarked)
-                        // 현재 북마크 상태의 반대 메시지를 보여줌 (토글 후 상태 기준)
                         val message = if (isBookmarked) msgRemoved else msgAdded
                         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
                     }

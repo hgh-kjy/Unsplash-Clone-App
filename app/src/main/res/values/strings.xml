@@ -10,13 +10,25 @@
     <string name="label_author">Author</string>
     <string name="label_size">Size</string>
     <string name="label_created_at">Created At</string>
+
     <string name="msg_author_copied">Author name copied!</string>
+    <string name="msg_bookmark_added">Added to bookmarks</string>
+    <string name="msg_bookmark_removed">Removed from bookmarks</string>
+    <string name="msg_no_result">No search results.</string>
+    <string name="msg_press_back_again">Press back again to exit.</string>
+    <string name="msg_saved">Saved.</string>
+    <string name="msg_selected_count">%d selected</string>
+    <string name="msg_error_prefix">Error: </string>
+
+    <string name="label_retry">Retry</string>
 
     <string name="desc_back">Back</string>
     <string name="desc_bookmark">Bookmark</string>
     <string name="desc_search">Search</string>
     <string name="desc_photo">Photo</string>
-    <string name="msg_bookmark_added">Added to bookmarks</string>
-    <string name="msg_bookmark_removed">Removed from bookmarks</string>
-    <string name="msg_no_result">No search results.</string>
+    <string name="desc_close_selection">Close selection</string>
+    <string name="desc_save_selection">Save selection</string>
+    <string name="desc_close">Close</string>
+    <string name="desc_delete">Delete</string>
+    <string name="desc_selected">Selected</string>
 </resources>

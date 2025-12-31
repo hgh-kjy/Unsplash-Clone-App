@@ -4,7 +4,6 @@ import android.app.Activity
 import android.widget.Toast
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.*
@@ -23,13 +22,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import coil.compose.AsyncImage
+import com.test.unsplashcloneapp.R
 import com.test.unsplashcloneapp.presentation.SearchViewModel
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
@@ -41,13 +41,15 @@ fun SearchScreen(
 ) {
     val photos = viewModel.photos.collectAsLazyPagingItems()
     val textQuery by viewModel.textQuery.collectAsState()
-
     val selectedPhotos by viewModel.selectedPhotos.collectAsState()
     val isSelectionMode = selectedPhotos.isNotEmpty()
 
     val keyboardController = LocalSoftwareKeyboardController.current
     val context = LocalContext.current
     var backPressedTime by remember { mutableLongStateOf(0L) }
+
+    val msgPressBack = stringResource(R.string.msg_press_back_again)
+    val msgSaved = stringResource(R.string.msg_saved)
 
     BackHandler {
         when {
@@ -59,7 +61,7 @@ fun SearchScreen(
                     (context as? Activity)?.finish()
                 } else {
                     backPressedTime = currentTime
-                    Toast.makeText(context, "한 번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, msgPressBack, Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -69,27 +71,27 @@ fun SearchScreen(
         topBar = {
             if (isSelectionMode) {
                 TopAppBar(
-                    title = { Text("${selectedPhotos.size}개 선택됨") },
+                    title = { Text(stringResource(R.string.msg_selected_count, selectedPhotos.size)) },
                     navigationIcon = {
                         IconButton(onClick = { viewModel.clearSelection() }) {
-                            Icon(Icons.Default.Close, contentDescription = "Close Selection")
+                            Icon(Icons.Default.Close, contentDescription = stringResource(R.string.desc_close_selection))
                         }
                     },
                     actions = {
                         IconButton(onClick = {
                             viewModel.saveSelectedToBookmarks()
-                            Toast.makeText(context, "저장되었습니다.", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, msgSaved, Toast.LENGTH_SHORT).show()
                         }) {
-                            Icon(Icons.Default.BookmarkAdd, contentDescription = "Save Selection")
+                            Icon(Icons.Default.BookmarkAdd, contentDescription = stringResource(R.string.desc_save_selection))
                         }
                     }
                 )
             } else {
                 TopAppBar(
-                    title = { Text("사진 검색") },
+                    title = { Text(stringResource(R.string.search_title)) },
                     actions = {
                         IconButton(onClick = onBookmarkClick) {
-                            Icon(Icons.Default.CollectionsBookmark, contentDescription = "Bookmarks")
+                            Icon(Icons.Default.CollectionsBookmark, contentDescription = stringResource(R.string.desc_bookmark))
                         }
                     }
                 )
@@ -101,13 +103,13 @@ fun SearchScreen(
                 value = textQuery,
                 onValueChange = { viewModel.updateTextQuery(it) },
                 modifier = Modifier.fillMaxWidth().padding(16.dp),
-                placeholder = { Text("사진 검색...") },
+                placeholder = { Text(stringResource(R.string.search_placeholder)) },
                 trailingIcon = {
                     IconButton(onClick = {
                         viewModel.search()
                         keyboardController?.hide()
                     }) {
-                        Icon(Icons.Default.Search, contentDescription = "Search")
+                        Icon(Icons.Default.Search, contentDescription = stringResource(R.string.desc_search))
                     }
                 },
                 singleLine = true,
@@ -153,14 +155,14 @@ fun SearchScreen(
                             ) {
                                 AsyncImage(
                                     model = it.urls.small,
-                                    contentDescription = null,
+                                    contentDescription = stringResource(R.string.desc_photo),
                                     modifier = Modifier.fillMaxSize().alpha(if (isSelected) 0.5f else 1f),
                                     contentScale = ContentScale.Crop
                                 )
                                 if (isSelected) {
                                     Icon(
                                         imageVector = Icons.Default.CheckCircle,
-                                        contentDescription = "Selected",
+                                        contentDescription = stringResource(R.string.desc_selected),
                                         tint = MaterialTheme.colorScheme.primary,
                                         modifier = Modifier.align(Alignment.TopEnd).padding(8.dp)
                                     )
@@ -169,8 +171,29 @@ fun SearchScreen(
                         }
                     }
                 }
-                if (photos.loadState.refresh is LoadState.Loading) {
-                    CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+
+                when {
+                    photos.loadState.refresh is LoadState.Loading -> {
+                        CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+                    }
+                    photos.loadState.refresh is LoadState.Error -> {
+                        val e = (photos.loadState.refresh as LoadState.Error).error
+                        Column(
+                            modifier = Modifier.align(Alignment.Center),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Text(text = stringResource(R.string.msg_error_prefix) + e.localizedMessage)
+                            Button(onClick = { photos.retry() }) {
+                                Text(stringResource(R.string.label_retry))
+                            }
+                        }
+                    }
+                    photos.loadState.refresh is LoadState.NotLoading && photos.itemCount == 0 -> {
+                        Text(
+                            text = stringResource(R.string.msg_no_result),
+                            modifier = Modifier.align(Alignment.Center)
+                        )
+                    }
                 }
             }
         }

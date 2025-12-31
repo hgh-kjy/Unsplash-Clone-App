@@ -11,14 +11,25 @@
     <string name="label_author">작가</string>
     <string name="label_size">크기</string>
     <string name="label_created_at">생성일</string>
+
     <string name="msg_author_copied">작가 이름이 복사되었습니다!</string>
+    <string name="msg_bookmark_added">북마크에 추가되었습니다</string>
+    <string name="msg_bookmark_removed">북마크가 해제되었습니다</string>
+    <string name="msg_no_result">검색 결과가 없습니다.</string>
+    <string name="msg_press_back_again">한 번 더 누르면 종료됩니다.</string>
+    <string name="msg_saved">저장되었습니다.</string>
+    <string name="msg_selected_count">%d개 선택됨</string>
+    <string name="msg_error_prefix">에러: </string>
+
+    <string name="label_retry">다시 시도</string>
 
     <string name="desc_back">뒤로 가기</string>
     <string name="desc_bookmark">북마크</string>
     <string name="desc_search">검색</string>
     <string name="desc_photo">사진</string>
-    <string name="msg_bookmark_added">북마크에 추가되었습니다</string>
-    <string name="msg_bookmark_removed">북마크가 해제되었습니다</string>
-    <string name="msg_no_result">검색 결과가 없습니다.</string>
-
+    <string name="desc_close_selection">선택 닫기</string>
+    <string name="desc_save_selection">선택 저장</string>
+    <string name="desc_close">닫기</string>
+    <string name="desc_delete">삭제</string>
+    <string name="desc_selected">선택됨</string>
 </resources>
