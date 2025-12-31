@@ -14,15 +14,15 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class DetailViewModel @Inject constructor(
+open class DetailViewModel @Inject constructor(
     private val unsplashService: UnsplashService,
     private val bookmarkDao: BookmarkDao
 ) : ViewModel() {
 
     private val _photoDetail = MutableStateFlow<UnsplashPhoto?>(null)
-    val photoDetail: StateFlow<UnsplashPhoto?> = _photoDetail
+    open val photoDetail: StateFlow<UnsplashPhoto?> = _photoDetail
 
-    fun loadPhotoDetail(id: String) {
+    open fun loadPhotoDetail(id: String) {
         viewModelScope.launch {
             try {
                 val photo = unsplashService.getPhotoDetail(id)
@@ -33,9 +33,9 @@ class DetailViewModel @Inject constructor(
         }
     }
 
-    fun isBookmarked(id: String): Flow<Boolean> = bookmarkDao.isBookmarked(id)
+    open fun isBookmarked(id: String): Flow<Boolean> = bookmarkDao.isBookmarked(id)
 
-    fun toggleBookmark(photo: UnsplashPhoto, isCurrentlyBookmarked: Boolean) {
+    open fun toggleBookmark(photo: UnsplashPhoto, isCurrentlyBookmarked: Boolean) {
         viewModelScope.launch {
             if (isCurrentlyBookmarked) {
                 bookmarkDao.deleteBookmark(photo.id)

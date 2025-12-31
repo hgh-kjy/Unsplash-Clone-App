@@ -11,11 +11,11 @@ import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
 @HiltViewModel
-class BookmarkViewModel @Inject constructor(
+open class BookmarkViewModel @Inject constructor(
     private val bookmarkDao: BookmarkDao
 ) : ViewModel() {
 
-    val bookmarks: StateFlow<List<BookmarkEntity>> = bookmarkDao.getAllBookmarks()
+    open val bookmarks: StateFlow<List<BookmarkEntity>> = bookmarkDao.getAllBookmarks()
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5000),
