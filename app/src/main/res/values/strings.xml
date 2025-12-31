@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">Unsplash Clone App</string>
+    <string name="search_title">Search photos</string>
+    <string name="search_placeholder">Search photos…</string>
+    <string name="detail_title">Detail</string>
+    <string name="bookmarks_title">Bookmarks</string>
+    <string name="empty_bookmarks">Empty.</string>
+
+    <string name="label_id">ID</string>
+    <string name="label_author">Author</string>
+    <string name="label_size">Size</string>
+    <string name="label_created_at">Created At</string>
+    <string name="msg_author_copied">Author name copied!</string>
+
+    <string name="desc_back">Back</string>
+    <string name="desc_bookmark">Bookmark</string>
+    <string name="desc_search">Search</string>
+    <string name="desc_photo">Photo</string>
+    <string name="msg_bookmark_added">Added to bookmarks</string>
+    <string name="msg_bookmark_removed">Removed from bookmarks</string>
+    <string name="msg_no_result">No search results.</string>
 </resources>

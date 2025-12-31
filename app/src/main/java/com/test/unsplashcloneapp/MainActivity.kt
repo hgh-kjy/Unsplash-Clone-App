@@ -12,7 +12,7 @@ import com.test.unsplashcloneapp.presentation.ui.SearchScreen
 import com.test.unsplashcloneapp.ui.theme.UnsplashCloneAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint // <--- 이 어노테이션이 없으면 에러가 발생합니다!
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,13 +36,21 @@ class MainActivity : ComponentActivity() {
                         val photoId = backStackEntry.arguments?.getString("photoId")
                         DetailScreen(
                             photoId = photoId,
-                            onBackClick = { navController.popBackStack() }
+                            onBackClick = {
+                                if (navController.previousBackStackEntry != null) {
+                                    navController.popBackStack()
+                                }
+                            }
                         )
                     }
 
                     composable("bookmark") {
                         BookmarkScreen(
-                            onBackClick = { navController.popBackStack() },
+                            onBackClick = {
+                                if (navController.previousBackStackEntry != null) {
+                                    navController.popBackStack()
+                                }
+                            },
                             onImageClick = { photoId ->
                                 navController.navigate("detail/$photoId")
                             }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">언스플래시 클론</string>
+    <string name="search_title">사진 검색</string>
+    <string name="search_placeholder">사진 검색…</string>
+    <string name="detail_title">상세 정보</string>
+    <string name="bookmarks_title">북마크</string>
+    <string name="empty_bookmarks">비어있음.</string>
+
+    <string name="label_id">아이디</string>
+    <string name="label_author">작가</string>
+    <string name="label_size">크기</string>
+    <string name="label_created_at">생성일</string>
+    <string name="msg_author_copied">작가 이름이 복사되었습니다!</string>
+
+    <string name="desc_back">뒤로 가기</string>
+    <string name="desc_bookmark">북마크</string>
+    <string name="desc_search">검색</string>
+    <string name="desc_photo">사진</string>
+    <string name="msg_bookmark_added">북마크에 추가되었습니다</string>
+    <string name="msg_bookmark_removed">북마크가 해제되었습니다</string>
+    <string name="msg_no_result">검색 결과가 없습니다.</string>
+
+</resources>
